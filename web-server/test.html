@@ -1,0 +1,55 @@
+<button onclick="me()">GET ME</button>
+<button onclick="login()">LOGIN</button>
+
+<script>
+
+    var token;
+  function login() {
+    var xhr = new XMLHttpRequest();
+    // we defined the xhr
+
+    xhr.onreadystatechange = function () {
+      if (this.readyState != 4) return;
+
+      if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+
+        // we get the returned data
+        console.log(data);
+      }
+
+      // end of state change: it can be after some time (async)
+    };
+
+    //   xhr.open("GET", "http://localhost:3000/users/me", true);
+
+    xhr.open("POST", "http://localhost:3000/auth/login", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(
+      JSON.stringify({
+        email: "admin@gg.com",
+        password: "admin0",
+      })
+    );
+  }
+
+  function me() {
+    var xhr = new XMLHttpRequest();
+    // we defined the xhr
+
+    xhr.onreadystatechange = function () {
+
+      if (this.status == 201) {
+        var data = JSON.parse(this.responseText);
+
+        // we get the returned data
+        console.log(data);
+      }
+
+      // end of state change: it can be after some time (async)
+    };
+    xhr.open("GET", "http://localhost:3000/users/me", true);
+    xhr.setRequestHeader("cookies","token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzEzNjIxNjg4OTkxYjAyMmE0ZWMzZGUiLCJpYXQiOjE2NjIyMTkwMTh9.sZCdD-JZUoSlJcwhdyNbGmObj3WGSTB7BDHzgkOBI78; Max-Age=259200; Path=/; Expires=Tue, 06 Sep 2022 15:30:18 GMT; HttpOnly")
+    xhr.send();
+  }
+</script>
