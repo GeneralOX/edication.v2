@@ -1,0 +1,55 @@
+<div class="w-full flex justify-center items-center">
+  <section class="w-full course-content">
+    <div class="container">
+      <div class="row flex justify-center items-center">
+        <div class="col-lg-9">
+          <div class="row">
+            <div *ngFor="let e of courses" class="col-lg-6 col-md-12 d-flex">
+              <div class="course-box course-design list-course d-flex">
+                <div class="product">
+                  <div class="product-img">
+                    <a>
+                      <img class="img-fluid" alt="" [src]="e.imgUrl" />
+                    </a>
+                    <div class="price">
+                      <h3>{{ e.price }}</h3>
+                    </div>
+                  </div>
+                  <div class="product-content">
+                    <div class="head-course-title">
+                      <h3 class="title">
+                        <a>{{ e.title }}</a>
+                      </h3>
+                    </div>
+                    <div
+                      class="course-info border-bottom-0 pb-0 d-flex align-items-center"
+                    >
+                      <div class="rating-img d-flex align-items-center">
+                        <img src="assets/img/icon/icon-01.svg" alt="" />
+                        <p>{{ e.startAt }}</p>
+                      </div>
+                      <div class="course-view d-flex align-items-center">
+                        <img src="assets/img/icon/icon-02.svg" alt="" />
+                        <p>{{ e.endAt }}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p>{{ e.subtitle }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              *ngIf="courses.length == 0"
+              class="flex justify-center items-center py-10 bg-white"
+            >
+              <h3 class="font-bold">No courses yet!</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

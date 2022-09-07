@@ -5,6 +5,8 @@ import cors from 'cors';
 
 import "./controllers/auth.controller"
 import "./controllers/users.controller"
+import "./controllers/courses.controller"
+import "./controllers/events.controller"
 
 export class Application {
     async Setup() {

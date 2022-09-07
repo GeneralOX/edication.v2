@@ -1,25 +1,21 @@
 import { injectable } from "inversify";
-import { randomBytes } from "crypto";
 import jwt from "jsonwebtoken";
 import { UsersRepository } from "../../data/repositories/users.repository";
-import bcrypt from "bcryptjs";
 
-import { userActivateDto, userLoginDto, userRegisterDto, userVerifPasswordRestDto } from "../../cors/dto/users.dto";
 
 @injectable()
 export class UsersService {
     constructor(private readonly repo: UsersRepository) { }
 
-    async Register(dto: userRegisterDto) {
-        const existingUser = await this.repo.findOne({ email: dto.email });
+    async Register(dto: any) {
+        const existingUser = await this.repo.findOne({ username: dto.username });
         if (existingUser) {
             return {
                 success: false,
                 message: "E-Mail address already exists."
             }
         }
-        dto.password = await bcrypt.hash(dto.password, 12);
-        dto.activationToken = (await (randomBytes)(20)).toString("hex");
+        // dto.password = await bcrypt.hash(dto.password, 12);
 
         const created = await this.repo.create(dto);
         if (created.success) {
@@ -37,17 +33,17 @@ export class UsersService {
         };
     }
 
-    async Login(dto: userLoginDto) {
-        const user = await this.repo.findOne({ email: dto.email });
+    async Login(dto: any) {
+        const user = await this.repo.findOne({ username: dto.username });
         if (!user) {
             return {
                 success: false,
-                message: "An user with this email could not be found."
+                message: "An user with this username could not be found."
             }
         }
 
-        const isEqual = await bcrypt.compare(dto.password, user.password);
-        if (!isEqual) {
+        // const isEqual = await bcrypt.compare(dto.password, user.password);
+        if (dto.password != user.password) {
             return {
                 success: false,
                 message: "Wrong password."
@@ -56,14 +52,14 @@ export class UsersService {
         const token = this.JwtSign(user._id)
         return {
             success: true,
-            userId: user._id,
+            user: user,
             message: "User successfully logged in.",
             token,
         };
     }
 
-    async GetUser(userId: any) {
-        const user = await this.repo.findOne({ _id: userId });
+    async GetUser(id: any) {
+        const user = await this.repo.findOne({ _id: id });
         if (!user) {
             return {
                 success: false,
@@ -75,14 +71,64 @@ export class UsersService {
             data: user
         }
     }
-    //ActivateAcount(dto: userActivateDto) { }
 
-    //RestPassword(uid: string) { }
+    async all() {
+        const user = await this.repo.findAll();
 
-    //VerifPasswordReset(dto: userVerifPasswordRestDto) { }
+        return {
+            success: true,
+            data: user
+        }
+    }
 
+    async confirm(obj: any) {
+        await this.repo.confirm(obj);
+        return true;
+    }
+    async update(id: string, obj: any) {
+        await this.repo.update(id, obj);
+        return true;
+    }
+    async delete(obj: any) {
+        await this.repo.delete(obj);
+        return true;
+    }
 
+    /** PRIVATE CONTENT **/
+    async GetOwnCourse(id: string) {
+        const courses: any[] = await this.repo.getOwnCourse(id);
+        return {
+            success: true,
+            data: courses
+        }
+    }
 
+    async GetOwnEvent(id: string) {
+        const events: any[] = await this.repo.getOwnEvent(id);
+        return {
+            success: true,
+            data: events
+        }
+    }
+    /** PRIVATE CONTENT **/
+    async GetUserJoinedCourse(id: string) {
+        const courses: any[] = await this.repo.getJoinedCourses(id);
+        return {
+            success: true,
+            data: courses
+        }
+    }
+
+    async GetUserJoinedEvent(id: string) {
+        console.log(id)
+        const events: any[] = await this.repo.getJoinedEvents(id);
+        return {
+            success: true,
+            data: events
+        }
+    }
+
+    /** PRIVATE CONTENT **/
     private JwtSign(id: any) {
         return jwt.sign(
             { userId: id.toString() },

@@ -8,13 +8,18 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CoursesComponent } from './courses/courses.component';
 import { EventsComponent } from './events/events.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 const routes: Routes = [
   {
     path: "", component: BaseComponent, children: [
       { path: "", component: HomePageComponent },
-      // { path: "events", component: StudentEventComponent },
-      // { path: "my-courses", component: MycourseComponent },
+      { path: "register", component: RegisterComponent },
+      { path: "login", component: LoginComponent },
+      { path: "courses", component: CoursesComponent },
+      { path: "events", component: EventsComponent },
+      { path: "confirm", component: ConfirmComponent },
     ]
   },
 ];
@@ -27,11 +32,14 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     CoursesComponent,
-    EventsComponent
+    EventsComponent,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class BaseModule { }

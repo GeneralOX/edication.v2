@@ -1,0 +1,49 @@
+<div style="background: #645b73" class="flex flex-col items-center">
+  <div class="w-full max-w-4xl">
+    <div class="mt-40"></div>
+    <div class="mb-5 flex items-center">
+      <div class="flex flex-1">
+        <img
+          src="assets/img/user/user11.jpg"
+          alt=""
+          class="w-20 border-white border-4 rounded-md"
+        />
+        <div class="flex items-center">
+          <div class="mx-5">
+            <h4 class="mb-4 text-3xl text-white flex items-center">
+              <a>{{ username }}</a>
+              <span
+                class="text-sm bg-white text-black py-1 px-2 rounded-xl mx-3"
+                >Beginner</span
+              >
+            </h4>
+            <p class="text-white font-bold">Student</p>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="px-12 text-white rounded-md py-3"
+        style="background-color: #ff5364"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </div>
+    <div class="w-full border-t p-4">
+      <ul class="flex justify-evenly">
+        <li *ngFor="let e of links">
+          <a
+            routerLinkActive="active text-white"
+            routerLink="{{ e.url }}"
+            class="active:text-white text-gray-400 hover:underline hover:text-white cursor-pointer font-bold tracking-wider"
+          >
+            {{ e.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

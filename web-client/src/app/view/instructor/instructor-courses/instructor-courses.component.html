@@ -1,0 +1,81 @@
+<div class="w-full p-20">
+  <div
+    style="min-width: 60rem"
+    class="flex justify-between relative text-start mb-5"
+  >
+    <h3 class="text-2xl">Courses</h3>
+    <button
+      routerLink="/instructor/course"
+      class="py-3 px-6 bg-green-500 rounded-lg text-white"
+    >
+      create course
+    </button>
+  </div>
+  <div style="min-width: 60rem" class="overflow-x-auto relative">
+    <table class="w-full text-base text-left text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3 px-6">title</th>
+          <th scope="col" class="py-3 px-6">subtitle</th>
+          <th scope="col" class="py-3 px-6">subject</th>
+          <th scope="col" class="py-3 px-6">price</th>
+          <th scope="col" class="py-3 px-6">places</th>
+          <th scope="col" class="py-3 px-6">Date</th>
+          <th scope="col" class="py-3 px-6">participants</th>
+          <th scope="col" class="py-3 px-6"></th>
+          <th scope="col" class="py-3 px-6"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b" *ngFor="let e of courses">
+          <td class="py-4 px-6">
+            {{ e.title }}
+          </td>
+          <td class="py-4 px-6">
+            {{ e.subtitle }}
+          </td>
+          <td class="py-4 px-6">
+            {{ e.subject }}
+          </td>
+          <td class="py-4 px-6">
+            {{ e.price }}
+          </td>
+          <td class="py-4 px-6">
+            {{ e.places }}
+          </td>
+
+          <td class="py-4 px-6">
+            <h3 class="block">StartAt: {{ e.startAt }}</h3>
+            <h3 class="block">EndAt: {{ e.endAt }}</h3>
+          </td>
+
+          <td>
+            <a
+              [routerLink]="['/instructor/course/participant', e._id]"
+              class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 block border border-blue-500 hover:border-transparent rounded mx-1"
+            >
+              <p class="text-center">participant</p>
+            </a>
+          </td>
+          <td class="py-4 px-6">
+            <a
+              (click)="courseDelete(e._id)"
+              class="bg-transparent cursor-pointer hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 my-2 block border border-red-500 hover:border-transparent rounded mx-1"
+            >
+              Delete
+            </a>
+
+            <a
+              [routerLink]="['/instructor/course', e._id]"
+              class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 block border border-blue-500 hover:border-transparent rounded mx-1"
+            >
+              Edit
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div></div>

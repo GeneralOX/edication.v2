@@ -1,0 +1,85 @@
+<div class="min-h-screen w-full flex justify-center items-center">
+  <form
+    style="width: 35rem"
+    class="p-8 bg-gray-50"
+    [formGroup]="form!"
+    (submit)="onSubmit()"
+  >
+    <div class="flex items-center mb-10">
+      <a [href]="backTo" class="underline text-sm">Back</a>
+
+      <h3 class="flex-1 text-center text-3xl">
+        {{ uid == "" ? "Create New Event" : "Edit" }}
+      </h3>
+    </div>
+    <div class="mb-5">
+      <p class="pb-2">id:</p>
+      <input
+        type="text"
+        class="border rounded bg-gray-200 block w-full outline-none text-gray-500 p-3"
+        readonly
+        [value]="uid"
+      />
+    </div>
+
+    <div class="mb-5">
+      <p class="pb-2">title:</p>
+      <input
+        type="text"
+        class="border rounded block w-full p-3"
+        formControlName="title"
+      />
+    </div>
+    <div class="mb-5">
+      <p class="pb-2">imgUrl:</p>
+      <input
+        type="text"
+        class="border rounded block w-full p-3"
+        formControlName="imgUrl"
+      />
+    </div>
+
+    <div class="mb-5">
+      <p class="pb-2">Start At:</p>
+      <input
+        type="date"
+        class="border rounded block w-full p-3"
+        formControlName="startAt"
+      />
+    </div>
+    <div class="mb-5">
+      <p class="pb-2">End At:</p>
+      <input
+        type="date"
+        class="border rounded block w-full p-3"
+        formControlName="endAt"
+      />
+    </div>
+    <div class="mb-5">
+      <p class="pb-2">Location:</p>
+      <input
+        type="text"
+        class="border rounded block w-full p-3"
+        formControlName="location"
+      />
+    </div>
+
+    <div class="mb-5">
+      <p class="pb-2">subtitle:</p>
+      <textarea
+        class="border rounded block w-full p-3"
+        rows="8"
+        formControlName="subtitle"
+      ></textarea>
+    </div>
+
+    <div class="d-grid">
+      <button
+        class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 w-full border border-green-700 rounded"
+        type="submit"
+      >
+        save
+      </button>
+    </div>
+  </form>
+</div>

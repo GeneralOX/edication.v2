@@ -1,0 +1,71 @@
+<div class="h-screen w-full flex justify-center items-center">
+    <form
+      style="width: 30rem"
+      class="p-8 bg-gray-50"
+      [formGroup]="userForm"
+      (submit)="onSubmit()"
+    >
+      <div class="flex items-center mb-10">
+        <a routerLink="/admin" class="underline text-sm">Back</a>
+  
+        <h3 class="flex-1 text-center text-3xl">Edit</h3>
+      </div>
+      <div class="mb-5">
+        <p class="pb-2">id:</p>
+        <input
+          type="text"
+          class="border rounded bg-gray-200 block w-full outline-none text-gray-500 p-3"
+          readonly
+          [value]="userId"
+        />
+      </div>
+  
+      <div class="mb-5">
+        <p class="pb-2">Full Name:</p>
+        <input
+          type="text"
+          class="border rounded block w-full p-3"
+          placeholder="Enter your full name"
+          formControlName="name"
+        />
+      </div>
+  
+      <div class="mb-5">
+        <p class="pb-2">Username:</p>
+        <input
+          type="text"
+          class="border rounded block w-full p-3"
+          placeholder="Enter your username"
+          formControlName="username"
+        />
+      </div>
+  
+      <div class="mb-5">
+        <p class="pb-2">Password:</p>
+        <input
+          type="password"
+          class="border rounded block w-full p-3"
+          placeholder="Enter your password"
+          formControlName="password"
+        />
+      </div>
+  
+      <div class="mb-5">
+        <p class="pb-2">Role:</p>
+        <select class="border rounded block w-full p-3" formControlName="role">
+          <option [value]=3>Student</option>
+          <option [value]=2>Instructor</option>
+          <option [value]=1>Admin</option>
+        </select>
+      </div>
+  
+      <div class="d-grid">
+        <button
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 w-full border border-green-700 rounded"
+          type="submit"
+        >
+          save
+        </button>
+      </div>
+    </form>
+  </div>

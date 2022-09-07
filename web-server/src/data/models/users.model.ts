@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 export const usersModel = new mongoose.Schema(
     {
-        email: {
+        name: {
+            type: String,
+            required: true,
+        },
+        username: {
             type: String,
             required: true,
         },
@@ -10,24 +14,15 @@ export const usersModel = new mongoose.Schema(
             type: String,
             required: true,
         },
-        name: {
-            type: String,
-            required: true,
-        },
+
         active: {
             type: Boolean,
             required: true,
             default: false,
         },
-        activationToken: {
-            type: String,
-        },
-        resetToken: {
-            type: String,
-        },
-        resetTokenExpiry: {
+        role: {
             type: Number,
-        },
+        }
     },
     { timestamps: true }
 );

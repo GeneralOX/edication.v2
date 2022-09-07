@@ -1,1 +1,87 @@
-<p>events works!</p>
+<div class="h-28"></div>
+
+<section class="course-content min-h-screen flex justify-center items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9" style="margin: 0 auto">
+        <div class="showing-list">
+          <div class="row">
+            <div class="col-lg-12 bg-white py-3" style="margin: 10px auto">
+              <div class="show-filter add-course-info">
+                <div class="flex justify-between">
+                  <h3 class="flex-1 mt-2 mx-2 mb-2 text-lg">Events</h3>
+                  <div class="row gx-2">
+                    <div class="col-md-6 col-item">
+                      <div class="search-group">
+                        <i class="feather-search"></i>
+                        <input
+                          type="text"
+                          class="form-control w-48"
+                          #inpVal
+                          placeholder="Search our courses"
+                        />
+                        <button
+                          (click)="SearchEvent(inpVal.value)"
+                          class="px-3 py-2 text-white mx-2 bg-orange-400 rounded"
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div *ngFor="let e of events" class="col-lg-4 col-md-6 d-flex">
+            <div class="course-box course-design d-flex">
+              <div class="product">
+                <div class="product-img">
+                  <a>
+                    <img class="img-fluid" alt="" [src]="e.imgUrl" />
+                  </a>
+                  <div class="price">
+                    <h3>{{ e.location }}</h3>
+                  </div>
+                </div>
+                <div class="product-content">
+                  <h3 class="title">
+                    <a> {{ e.title }} </a>
+                  </h3>
+                  <p>
+                    {{ e.subtitle }}
+                  </p>
+                  <div class="course-info d-flex align-items-center">
+                    <div class="rating-img d-flex align-items-center">
+                      <img src="assets/img/icon/icon-01.svg" alt="" />
+                      <p>{{ e.startAt }}</p>
+                    </div>
+                    <div class="course-view d-flex align-items-center">
+                      <img src="assets/img/icon/icon-02.svg" alt="" />
+                      <p>{{ e.endAt }}</p>
+                    </div>
+                  </div>
+
+                  <div class="all-btn all-category d-flex align-items-center">
+                    <a (click)="JoinEvent(e._id)" class="btn btn-primary">
+                      JOIN NOW
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="events.length == 0"
+            class="flex justify-center items-center py-10 bg-white"
+          >
+            <h3 class="font-bold">No event yet!</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

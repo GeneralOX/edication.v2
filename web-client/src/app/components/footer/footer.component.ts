@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  shown = true;
+
+  constructor(private router: Router) {
+
+    router.events
+      .subscribe((event: any) => {
+        if (event instanceof NavigationEnd) {
+          if (["/login", "/register"].includes(event.url))
+            this.shown = false;
+          else
+            this.shown = true;
+        }
+      });
+  }
 
   ngOnInit(): void {
   }

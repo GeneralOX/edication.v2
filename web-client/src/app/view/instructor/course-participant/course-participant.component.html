@@ -1,0 +1,32 @@
+<div class="w-full p-20">
+    <div
+      style="width: 60rem"
+      class="flex justify-between relative text-start mb-5"
+    >
+      <h3 class="text-2xl">Participants:</h3>
+    </div>
+    <div style="width: 60rem" class="overflow-x-auto relative">
+      <table class="w-full text-base text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="py-3 px-6">Name</th>
+            <th scope="col" class="py-3 px-6">username</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white border-b" *ngFor="let e of participants">
+            <td class="py-4 px-6">
+              {{ e.name }}
+            </td>
+            <td class="py-4 px-6">
+              {{ e.username }}
+            </td>
+          
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div></div>
+  
